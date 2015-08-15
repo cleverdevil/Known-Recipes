@@ -36,7 +36,7 @@
     /* @var \Idno\Core\Template $this */
 
 ?>
-    <form action="<?= $vars['object']->getURL() ?>" method="post">
+    <form action="<?= $vars['object']->getURL() ?>" method="post" enctype="multipart/form-data">
 
         <div class="row">
 
@@ -60,7 +60,31 @@
                     }
 
                 ?>
-                
+
+                <?php
+
+                    if (empty($vars['object']->_id)) {
+
+                        ?>
+                        <div id="photo-preview"></div>
+                        <p>
+                                <span class="btn btn-primary btn-file">
+                                        <i class="fa fa-camera"></i> <span
+                                        id="photo-filename">Select a photo</span> <input type="file" name="photo"
+                                                                                         id="photo"
+                                                                                         class="col-md-9 form-control"
+                                                                                         accept="image/*;capture=camera"
+                                                                                         onchange="photoPreview(this)"/>
+
+                                    </span>
+                        </p>
+
+                    <?php
+
+                    }
+
+                ?>
+
                 <div class="content-form">
                     <label for="title">Title</label>
                     <input type="text" name="title" id="title" placeholder="Give it a title" value="<?= htmlspecialchars($title) ?>" class="form-control"/>                    
@@ -101,5 +125,26 @@
 
         </div>
     </form>
+
+    <script>
+        //if (typeof photoPreview !== function) {
+        function photoPreview(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#photo-preview').html('<img src="" id="photopreview" style="display:none; width: 400px">');
+                    $('#photo-filename').html('Choose different photo');
+                    $('#photopreview').attr('src', e.target.result);
+                    $('#photopreview').show();
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        //}
+    </script>
+
     <div id="bodyautosave" style="display:none"></div>
 <?= $this->draw('entity/edit/footer'); ?>

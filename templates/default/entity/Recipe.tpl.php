@@ -10,7 +10,31 @@
 
         }
 
+        if ($attachments = $vars['object']->getAttachments()) {
+            foreach ($attachments as $attachment) {
+                $mainsrc = $attachment['url'];
+                if (!empty($vars['object']->thumbnail_large)) {
+                    $src = $vars['object']->thumbnail_large;
+                } else if (!empty($vars['object']->thumbnail)) { // Backwards compatibility
+                    $src = $vars['object']->thumbnail;
+                } else {
+                    $src = $mainsrc;
+                }
+                
+                // Patch to correct certain broken URLs caused by https://github.com/idno/known/issues/526
+                $src = preg_replace('/^(https?:\/\/\/)/', \Idno\Core\site()->config()->getDisplayURL(), $src);
+                $mainsrc = preg_replace('/^(https?:\/\/\/)/', \Idno\Core\site()->config()->getDisplayURL(), $mainsrc);
+                
+                ?>
+                <p style="text-align: center">
+                    <a href="<?= $this->makeDisplayURL($mainsrc) ?>"><img src="<?= $this->makeDisplayURL($src) ?>" class="u-photo"/></a>
+                </p>
+            <?php
+            }
+        }
     ?>
+    
+    <br>
 
     <h4>Ingredients</h4>
     <ul>
@@ -22,7 +46,7 @@
             }
         ?>
     </ul>
-
+    
     <p>
         <?php
             if ($duration = $vars['object']->getDuration()) { ?>

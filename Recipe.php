@@ -153,10 +153,6 @@
                             } else {
                                 \Idno\Core\site()->session()->addErrorMessage('This doesn\'t seem to be an image ..');
                             }
-                        } else {
-                            \Idno\Core\site()->session()->addErrorMessage('We couldn\'t access your image. Please try again.');
-
-                            return false;
                         }
                     }
                     /* end new photo stuff */

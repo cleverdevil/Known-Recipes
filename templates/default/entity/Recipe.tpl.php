@@ -29,13 +29,12 @@
                 <p style="text-align: center">
                     <a href="<?= $this->makeDisplayURL($mainsrc) ?>"><img src="<?= $this->makeDisplayURL($src) ?>" class="u-photo"/></a>
                 </p>
+                <br>
             <?php
             }
         }
     ?>
     
-    <br>
-
     <h4>Ingredients</h4>
     <ul>
         <?php

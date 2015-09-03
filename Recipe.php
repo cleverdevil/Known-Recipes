@@ -63,12 +63,12 @@
             }
 
             /**
-             * Recipe objects have type 'recipe'
-             * @return 'recipe'
+             * Recipe objects have type 'article'
+             * @return 'article'
              */
             function getActivityStreamsObjectType()
             {
-                return 'recipe';
+                return 'article';
             }
 
             /**

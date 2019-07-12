@@ -60,6 +60,6 @@
     </p>
 
     <div class="e-instructions">
-        <?= $this->__(['value' => $vars['object']->body, 'object' => $vars['object'], 'rel' => $rel])->draw('forms/output/richtext'); ?>
+        <?= $this->__(['value' => $vars['object']->body, 'object' => $vars['object']])->draw('forms/output/richtext'); ?>
     </div>
 </article>

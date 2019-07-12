@@ -82,7 +82,6 @@
                 if (!empty($src)) {
                     return $src;
                 }
-
                 return parent::getIcon();
             }
 
